@@ -7,9 +7,10 @@ public class CameraController : MonoBehaviour
 	public Transform target; // Drag the target to follow in the inspector.
 	public bool clamp;
 	public Vector2 clampX, clampY;
+    public Vector3 cameraAngle = new Vector3(30, 0, 0);
 
-	// Speed at which the camera follows the player.
-	private float smoothSpeed = 2f;
+    // Speed at which the camera follows the player.
+    private float smoothSpeed = 2f;
 
 	// Distance from player to camera.
 	private float yOffset = 3f;
@@ -17,9 +18,10 @@ public class CameraController : MonoBehaviour
 
 	private void Start()
 	{
-		// Rotate camera.
-		transform.eulerAngles = new Vector3(30, 0, 0);
-	}
+        // Rotate camera.
+        transform.eulerAngles = cameraAngle;
+
+    }
 
 	private void FixedUpdate()
 	{

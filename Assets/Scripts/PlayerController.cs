@@ -32,19 +32,17 @@ public class PlayerController : MonoBehaviour
 
 	private void PlayerMovement() // Handles movement controls.
 	{
-		MovingDiagonal();
 
-		if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+		if (Input.GetAxis("Horizontal") != 0)
 		{
 			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
-			verticalMove = Input.GetAxisRaw("Vertical") * moveSpeed;
-			movement = new Vector3(horizontalMove, rb.velocity.y, verticalMove);
+			movement = new Vector3(horizontalMove, rb.velocity.y, rb.velocity.z);
 			rb.velocity = Vector3.Lerp(rb.velocity, movement, 15 * Time.deltaTime);
 		}
 
-		if (Input.GetAxis("Horizontal") == 0 && (Input.GetAxis("Vertical") == 0))
+		if (Input.GetAxis("Horizontal") == 0)
 		{
-			Vector3 standStill = new Vector3(0, rb.velocity.y, 0);
+			Vector3 standStill = new Vector3(0, rb.velocity.y, rb.velocity.z);
 			rb.velocity = Vector3.Lerp(rb.velocity, standStill, 30 * Time.deltaTime);
 		}
 	}
