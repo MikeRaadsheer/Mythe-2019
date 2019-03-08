@@ -1,0 +1,1 @@
+﻿public enum AttackTypes { STAB, SLASH, PUNCH, PROJECTILE, FIRE, WATER, POISION };

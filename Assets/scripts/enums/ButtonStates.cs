@@ -1,0 +1,1 @@
+﻿public enum ButtonStates { DEFAULT, ATTACK, ITEM };
