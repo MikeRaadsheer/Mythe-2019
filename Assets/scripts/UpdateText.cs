@@ -24,17 +24,42 @@ public class UpdateText : MonoBehaviour
         switch (targetSelector)
         {
             case targetType.PLAYER:
-                Player player = FindObjectOfType<Player>();
-                txtName.text = player.GetName();
-                txtHP.text = "HP: " + player.GetHp().ToString();
-                txtLVL.text = "LVL: " + player.GetLvl().ToString();
+                UpdatePlayer();
                 break;
             case targetType.SWARM:
-                Swarm swarm = FindObjectOfType<Swarm>();
-                txtName.text = swarm.GetName();
-                txtHP.text = "HP: " + swarm.GetHp().ToString();
-                txtLVL.text = "LVL: " + swarm.GetLvl().ToString();
+                UpdateSwarm();
                 break;
         }
     }
+
+    void UpdatePlayer()
+    {
+        Player player = FindObjectOfType<Player>();
+
+        if (!FindObjectOfType<Player>())
+        {
+            CancelInvoke("UpdateInfo");
+            return;
+        }
+
+        txtName.text = player.GetName();
+        txtHP.text = "HP: " + player.GetHp().ToString();
+        txtLVL.text = "LVL: " + player.GetLvl().ToString();
+    }
+
+    void UpdateSwarm()
+    {
+        Swarm swarm = FindObjectOfType<Swarm>();
+
+        if (!FindObjectOfType<Swarm>())
+        {
+            CancelInvoke("UpdateInfo");
+            return;
+        }
+
+        txtName.text = swarm.GetName();
+        txtHP.text = "HP: " + swarm.GetHp().ToString();
+        txtLVL.text = "LVL: " + swarm.GetLvl().ToString();
+    }
+
 }

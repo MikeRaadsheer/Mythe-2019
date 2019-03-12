@@ -63,7 +63,7 @@ public class ButtonUpdater : MonoBehaviour
                 break;
             case ButtonStates.ITEM:
                 menuState = ButtonStates.ITEM;
-                txtLT.text = ""/*HP POTION(S): + getter for ammount of potions*/;
+                txtLT.text = "HP Potion"/*HP POTION(S): + getter for ammount of potions*/;
                 txtLB.text = ""/*STR POTION(S): + getter for ammount of potions*/;
                 txtRT.text = ""/* Getters name weapon / fist and damage */;
                 txtRB.text = "BACK";
