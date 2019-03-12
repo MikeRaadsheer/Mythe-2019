@@ -5,7 +5,7 @@ public class Swarm : MonoBehaviour
 
 
     public Dialogue dialogue;
-    private Enemy swarm = new Enemy("Swarm", 10, 1, 0, AttackTypes.FIRE, AttackTypes.STAB, 1);
+    private Enemy swarm = new Enemy("Swarm", 10, 29, 0, AttackTypes.FIRE, AttackTypes.STAB, 1);
     private Player target;
 
     private bool waitToAttack = false;
@@ -39,6 +39,9 @@ public class Swarm : MonoBehaviour
             case AttackTypes.STAB:
                 dmg = 0;
                 break;
+            case AttackTypes.NONE:
+                takeTurn = true;
+                return;
         }
 
         swarm.hp -= dmg;

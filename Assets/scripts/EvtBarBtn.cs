@@ -28,7 +28,8 @@ public class EvtBarBtn : MonoBehaviour
                 player.attack(AttackTypes.PUNCH);
                 break;
             case ButtonStates.ITEM:
-                /*USE POTION*/
+                buttons.SetEvtBar(EvtBarStates.DIALOGUE);
+                player.takeDamage(AttackTypes.NONE, 10);
                 break;
         }
     }
