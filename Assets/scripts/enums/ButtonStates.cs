@@ -1,1 +1,1 @@
-﻿public enum ButtonStates { DEFAULT, ATTACK, ITEM };
+﻿public enum ButtonStates { DEFAULT, ATTACK, ITEM , DEV_TOOLS };
