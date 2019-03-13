@@ -8,9 +8,6 @@ public class ButtonUpdater : MonoBehaviour
     public GameObject buttons;
     public GameObject dialogue;
 
-    public Swarm target;
-    private Player player;
-    
     public Text txtLT;
     public Text txtLB;
     public Text txtRT;
@@ -18,12 +15,16 @@ public class ButtonUpdater : MonoBehaviour
 
     public Dialogue dialogueSystem;
 
+    private Inventory inv;
+    private DataManager dataManager;
+
     private ButtonStates menuState;
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
         menuState = ButtonStates.DEFAULT;
+        dataManager = FindObjectOfType<DataManager>();
+        inv = dataManager.GetData<Inventory>("inventory");
         SetMenu(menuState);
     }
 
@@ -51,8 +52,8 @@ public class ButtonUpdater : MonoBehaviour
                 menuState = ButtonStates.DEFAULT;
                 txtLT.text = "ATTACK";
                 txtLB.text = "ITEM";
-                txtRT.text = ""/*SKIP*/;
-                txtRB.text = ""/*RUN*/;
+                txtRT.text = "SKIP";
+                txtRB.text = "DEV TOOLS"/*RUN*/;
                 break;
             case ButtonStates.ATTACK:
                 menuState = ButtonStates.ATTACK;
@@ -63,9 +64,16 @@ public class ButtonUpdater : MonoBehaviour
                 break;
             case ButtonStates.ITEM:
                 menuState = ButtonStates.ITEM;
-                txtLT.text = "HP Potion"/*HP POTION(S): + getter for ammount of potions*/;
+                txtLT.text = "HP Potion: " + inv.items[0].ammount/*HP POTION(S): + getter for ammount of potions*/;
                 txtLB.text = ""/*STR POTION(S): + getter for ammount of potions*/;
                 txtRT.text = ""/* Getters name weapon / fist and damage */;
+                txtRB.text = "BACK";
+                break;
+            case ButtonStates.DEV_TOOLS:
+                menuState = ButtonStates.DEV_TOOLS;
+                txtLT.text = "SAVE INV";
+                txtLB.text = "SAVE PLAYER";
+                txtRT.text = "SAVE ALL";
                 txtRB.text = "BACK";
                 break;
         }

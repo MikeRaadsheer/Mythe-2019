@@ -5,21 +5,35 @@ using UnityEngine;
 public class Player : MonoBehaviour 
 {
 
-    private PlayerStats player = new PlayerStats("Spirit", 100, 2, 0, 1);
+
+    //private PlayerStats player;
+    public PlayerStats player;
 
     public Dialogue dialogue;
     private Swarm target;
     private ButtonUpdater buttons;
+
+    private DataManager dataManager;
 
     private bool waitToAttack = false;
     private bool takeTurn = false;
 
     private void Start()
     {
-        gameObject.name = player.name;
-
         buttons = FindObjectOfType<ButtonUpdater>();
         target = FindObjectOfType<Swarm>();
+
+        //player = new PlayerStats("Player", 100, 2, 0, 1);
+        dataManager = FindObjectOfType<DataManager>();
+        player = dataManager.GetData<PlayerStats>("player");
+        gameObject.name = player.name;
+
+        player.pos.x = transform.position.x;
+        player.pos.y = transform.position.y;
+        player.pos.z = transform.position.z;
+
+        //dataManager.SetData(Application.dataPath + "/gameData/player/", "player.json", player);
+
     }
 
     private void Update()
@@ -35,15 +49,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void takeDamage(AttackTypes type, int dmg)
+    public void TakeDamage(AttackTypes type, int dmg)
     {
         switch (type)
         {
             case AttackTypes.FIRE:
                 dmg *= 2;
-                break;
-            case AttackTypes.NONE:
-                if (dmg > 0) dmg = -dmg; ;
                 break;
         }
 
@@ -55,25 +66,32 @@ public class Player : MonoBehaviour
             dialogue.SetText(("You died").ToUpper());
             Destroy(gameObject, 1f);
         }
-        else if (dmg > 0)
+        else
         {
             dialogue.SetText(("You took " + dmg.ToString() + " damage!").ToUpper());
             waitToAttack = false;
-        }
-        else if (dmg < 0)
-        {
-            dmg = -dmg;
-            dialogue.SetText(("You gained " + dmg.ToString() + " hp!").ToUpper());
-            target.takeDamage(AttackTypes.NONE, 0);
-            return;
         }
 
         takeTurn = true;
     }
 
-    public void attack(AttackTypes type)
+    public void Heal(int ammount)
     {
-        target.takeDamage(type, player.att);
+        player.hp += ammount;
+        dialogue.SetText(("You gained " + ammount.ToString() + " hp!").ToUpper());
+        target.TakeTurn();
+    }
+
+    public void SkipTurn()
+    {
+        buttons.SetEvtBar(EvtBarStates.DIALOGUE);
+        dialogue.SetText(("You skipped your turn!").ToUpper());
+        target.TakeTurn();
+    }
+
+    public void Attack(AttackTypes type)
+    {
+        target.TakeDamage(type, player.att);
     }
 
     public string GetName()
@@ -90,5 +108,4 @@ public class Player : MonoBehaviour
     {
         return player.lvl;
     }
-
 }

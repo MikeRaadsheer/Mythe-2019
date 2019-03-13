@@ -7,11 +7,16 @@ public class EvtBarBtn : MonoBehaviour
     private ButtonUpdater buttons;
     private Player player;
 
+    private Inventory inv;
+    private DataManager dataManager;
+
     private ButtonStates menuState;
 
     private void Start()
     {
         player = FindObjectOfType<Player>();
+        dataManager = FindObjectOfType<DataManager>();
+        inv = dataManager.GetData<Inventory>("inventory");
         buttons = FindObjectOfType<ButtonUpdater>();
     }
 
@@ -25,11 +30,15 @@ public class EvtBarBtn : MonoBehaviour
                 break;
             case ButtonStates.ATTACK:
                 buttons.SetEvtBar(EvtBarStates.DIALOGUE);
-                player.attack(AttackTypes.PUNCH);
+                player.Attack(AttackTypes.PUNCH);
                 break;
             case ButtonStates.ITEM:
                 buttons.SetEvtBar(EvtBarStates.DIALOGUE);
-                player.takeDamage(AttackTypes.NONE, 10);
+                inv.items[0].ammount--;
+                player.Heal(10);
+                break;
+            case ButtonStates.DEV_TOOLS:
+                dataManager.Save("inventory");
                 break;
         }
     }
@@ -44,10 +53,13 @@ public class EvtBarBtn : MonoBehaviour
                 break;
             case ButtonStates.ATTACK:
                 buttons.SetEvtBar(EvtBarStates.DIALOGUE);
-                player.attack(AttackTypes.STAB);
+                player.Attack(AttackTypes.STAB);
                 break;
             case ButtonStates.ITEM:
                 /*BOOST ATTACK FOR X AMMOUNT OF TURNS*/
+                break;
+            case ButtonStates.DEV_TOOLS:
+                dataManager.Save("player");
                 break;
             default:
                 break;
@@ -60,14 +72,17 @@ public class EvtBarBtn : MonoBehaviour
         switch (menuState)
         {
             case ButtonStates.DEFAULT:
-                /*SKIP TURN*/
+                player.SkipTurn();
                 break;
             case ButtonStates.ATTACK:
                 buttons.SetEvtBar(EvtBarStates.DIALOGUE);
-                player.attack(AttackTypes.SLASH);
+                player.Attack(AttackTypes.SLASH);
                 break;
             case ButtonStates.ITEM:
                 /*SWITCH WEAPON*/
+                break;
+            case ButtonStates.DEV_TOOLS:
+                dataManager.SaveAll();
                 break;
             default:
                 break;
@@ -79,10 +94,16 @@ public class EvtBarBtn : MonoBehaviour
         menuState = buttons.GetMenuState();
         switch (menuState)
         {
+            case ButtonStates.DEFAULT:
+                buttons.SetMenu(ButtonStates.DEV_TOOLS);
+                break;
             case ButtonStates.ATTACK:
                 buttons.SetMenu(ButtonStates.DEFAULT);
                 break;
             case ButtonStates.ITEM:
+                buttons.SetMenu(ButtonStates.DEFAULT);
+                break;
+            case ButtonStates.DEV_TOOLS:
                 buttons.SetMenu(ButtonStates.DEFAULT);
                 break;
         }
