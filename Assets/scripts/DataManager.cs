@@ -15,7 +15,7 @@ public class DataManager : MonoBehaviour
 
     public Inventory inventory;
     public Enemy enemy;
-    public PlayerStats player;
+    public InventoryPlayerStats player;
 
     void Awake()
     {
@@ -26,7 +26,7 @@ public class DataManager : MonoBehaviour
 
 
         inventory = loadData.GetGameData<Inventory>(playerPath, inventoryFileName);
-        player = loadData.GetGameData<PlayerStats>(playerPath, playerFileName);
+        player = loadData.GetGameData<InventoryPlayerStats>(playerPath, playerFileName);
 
     }
 

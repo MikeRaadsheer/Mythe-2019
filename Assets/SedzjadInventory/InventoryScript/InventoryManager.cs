@@ -49,7 +49,7 @@ public class InventoryManager : MonoBehaviour
         if(other.tag == "Item")
         {
             GameObject ItemPickedUp = other.gameObject;
-            Items item = ItemPickedUp.GetComponent<Items>();
+            InventoryItems item = ItemPickedUp.GetComponent<InventoryItems>();
 
             AddItem(ItemPickedUp, item.ID, item.type, item.description, item.Icon);
         }
@@ -61,7 +61,7 @@ public class InventoryManager : MonoBehaviour
             if (slot[i].GetComponent<Slot>().Empty)
             {
                 
-                ItemObject.GetComponent<Items>().PickedUp = true;
+                ItemObject.GetComponent<InventoryItems>().PickedUp = true;
                 slot[i].GetComponent<Slot>().Item = ItemObject;
                 slot[i].GetComponent<Slot>().Icon = ItemIcon;
                 slot[i].GetComponent<Slot>().type = ItemType;

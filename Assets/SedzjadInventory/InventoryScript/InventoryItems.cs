@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Items : MonoBehaviour
+public class InventoryItems : MonoBehaviour
 {
     [HideInInspector]
     public GameObject ItemManager;
@@ -47,7 +47,7 @@ public class Items : MonoBehaviour
             int AllWeapons = ItemManager.transform.childCount;
             for(int i = 0; i<AllWeapons; i++)
             {
-                if(ItemManager.transform.GetChild(1).gameObject.GetComponent<Items>().ID == ID)
+                if(ItemManager.transform.GetChild(1).gameObject.GetComponent<InventoryItems>().ID == ID)
                 {
                     //AllItems = ItemManager.transform.GetChild(i).gameObject;
                 }
