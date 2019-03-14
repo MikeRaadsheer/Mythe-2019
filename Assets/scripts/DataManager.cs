@@ -10,6 +10,8 @@ public class DataManager : MonoBehaviour
     private string playerPath;
     private string playerFileName = "player.json";
 
+    public Dialogue dialogue;
+
     public LoadData loadData;
     public SaveData saveData;
 
@@ -24,6 +26,10 @@ public class DataManager : MonoBehaviour
 
         playerPath = Application.dataPath + "/gameData/player/";
 
+        //var inv = new Inventory();
+        //string invFileName = "inventory.json";
+
+        //saveData.SetGameData(playerPath, invFileName, inv);
 
         inventory = loadData.GetGameData<Inventory>(playerPath, inventoryFileName);
         player = loadData.GetGameData<InventoryPlayerStats>(playerPath, playerFileName);
@@ -62,6 +68,11 @@ public class DataManager : MonoBehaviour
     public void SetData(string path, string fileName, object data)
     {
         saveData.SetGameData(path, fileName, data);
+    }
+
+    public Dialogue GetDialogue()
+    {
+        return dialogue;
     }
 
 }

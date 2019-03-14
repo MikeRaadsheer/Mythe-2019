@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour 
 {
-
-
     //private PlayerStats player;
     public PlayerStats player;
 
-    public Dialogue dialogue;
+    private CombatTurn combat;
+    private Dialogue dialogue;
     private Swarm target;
     private ButtonUpdater buttons;
 
     private DataManager dataManager;
+    private Inventory inv;
 
     private bool waitToAttack = false;
     private bool takeTurn = false;
+    private bool returnToItem = false;
 
     private void Start()
     {
@@ -24,9 +25,12 @@ public class Player : MonoBehaviour
         target = FindObjectOfType<Swarm>();
 
         //player = new PlayerStats("Player", 100, 2, 0, 1);
+        combat = FindObjectOfType<CombatTurn>();
         dataManager = FindObjectOfType<DataManager>();
         player = dataManager.GetData<PlayerStats>("player");
+        inv = dataManager.GetData<Inventory>("inventory");
         gameObject.name = player.name;
+        dialogue = dataManager.GetDialogue();
 
         player.pos.x = transform.position.x;
         player.pos.y = transform.position.y;
@@ -46,6 +50,13 @@ public class Player : MonoBehaviour
             takeTurn = false;
             buttons.SetEvtBar(EvtBarStates.BUTTONS);
             buttons.SetMenu(ButtonStates.DEFAULT);
+        }
+
+        if (Input.anyKeyDown && !waitToAttack && returnToItem)
+        {
+            returnToItem = false;
+            buttons.SetEvtBar(EvtBarStates.BUTTONS);
+            buttons.SetMenu(ButtonStates.ITEM);
         }
     }
 
@@ -75,18 +86,24 @@ public class Player : MonoBehaviour
         takeTurn = true;
     }
 
-    public void Heal(int ammount)
+    public void Heal()
     {
+        if (inv.items.hpPotion.ammount <= 0)
+        {
+            buttons.SetEvtBar(EvtBarStates.DIALOGUE);
+            dialogue.SetText(("You can't heal anymore!\n Your potions have run out...").ToUpper());
+            returnToItem = true;
+            return;
+        }
+
+        buttons.SetEvtBar(EvtBarStates.DIALOGUE);
+        inv.items.hpPotion.ammount--;
+
+        var ammount = inv.items.hpPotion.lvl * 10;
+
         player.hp += ammount;
         dialogue.SetText(("You gained " + ammount.ToString() + " hp!").ToUpper());
-        target.TakeTurn();
-    }
-
-    public void SkipTurn()
-    {
-        buttons.SetEvtBar(EvtBarStates.DIALOGUE);
-        dialogue.SetText(("You skipped your turn!").ToUpper());
-        target.TakeTurn();
+        combat.EnemyTurn();
     }
 
     public void Attack(AttackTypes type)
