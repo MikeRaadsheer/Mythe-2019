@@ -1,1 +1,16 @@
-{"items":[{"name":"health potion","lvl":"1","desc":"this potion instantly gives you extra hp.\n the ammount of hp is decided by the level of the potion.","ammount":1},{"name":"strength potion","lvl":"1","desc":"this potion gives you extra strength for 3 turns.\n the ammount of added strength is decided by the level of the potion.","ammount":1}]}
+{
+  "items": {
+    "hpPotion": {
+      "name": "Health Potion",
+      "lvl": 1,
+      "desc": "gives instant hp.",
+      "ammount": 1
+    },
+    "strPotion": {
+      "name": "Strength Potion",
+      "lvl": 1,
+      "desc": "adds strenght...",
+      "ammount": 0
+    }
+  }
+}

@@ -14,8 +14,6 @@ public class LoadData : MonoBehaviour {
         string jsonString = File.ReadAllText(path + fileName);
         GameData data = JsonUtility.FromJson<GameData>(jsonString);
 
-        Debug.Log("good... for now");
-
         if(data != null) return data;
 
 

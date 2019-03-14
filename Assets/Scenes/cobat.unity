@@ -291,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75e115b24fd91f4681b4257fecb62f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 1560625546}
 --- !u!199 &266688543
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -10578,7 +10577,6 @@ MonoBehaviour:
       x: 0
       y: 0
       z: 0
-  dialogue: {fileID: 1560625546}
 --- !u!1 &1022928073
 GameObject:
   m_ObjectHideFlags: 0
@@ -11606,8 +11604,9 @@ GameObject:
   - component: {fileID: 1896222433}
   - component: {fileID: 1896222432}
   - component: {fileID: 1896222431}
+  - component: {fileID: 1896222435}
   m_Layer: 0
-  m_Name: DataMain
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11649,10 +11648,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb9021f6e50e934e892320c66c23f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogue: {fileID: 1560625546}
   loadData: {fileID: 1896222432}
   saveData: {fileID: 1896222431}
   inventory:
-    items: []
+    items:
+      hpPotion:
+        name: 
+        lvl: 0
+        desc: 
+        ammount: 0
+      strPotion:
+        name: 
+        lvl: 0
+        desc: 
+        ammount: 0
   player:
     name: 
     hp: 0
@@ -11677,6 +11687,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1896222435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896222430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4231190c4137d4ca0e8f8461cabb3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1918872469
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,5 +3,5 @@
 [Serializable]
 public class Inventory
 {
-    public Items[] items;
+    public Items items;
 }

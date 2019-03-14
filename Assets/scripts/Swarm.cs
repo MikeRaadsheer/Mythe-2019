@@ -3,8 +3,8 @@
 public class Swarm : MonoBehaviour
 {
 
-
-    public Dialogue dialogue;
+    private DataManager dataManager;
+    private Dialogue dialogue;
     private Enemy swarm = new Enemy("Swarm", 10, 1, 0, AttackTypes.FIRE, AttackTypes.STAB, 1);
     private Player target;
 
@@ -14,8 +14,10 @@ public class Swarm : MonoBehaviour
 
     private void Start()
     {
+        dataManager = FindObjectOfType<DataManager>();
         swarm.att = (int)Mathf.Sqrt(swarm.lvl);
         target = FindObjectOfType<Player>();
+        dialogue = dataManager.GetDialogue();
     }
 
     private void Update()
@@ -56,13 +58,13 @@ public class Swarm : MonoBehaviour
             waitToAttack = false;
         }
 
-        TakeTurn();
+        takeTurn = true;
 
     }
 
-    public void TakeTurn()
+    public void SetTakeTurn(bool val)
     {
-        takeTurn = true;
+        takeTurn = val;
     }
 
     public string GetName()

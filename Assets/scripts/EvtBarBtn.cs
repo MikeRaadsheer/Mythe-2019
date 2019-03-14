@@ -6,6 +6,8 @@ public class EvtBarBtn : MonoBehaviour
 {
     private ButtonUpdater buttons;
     private Player player;
+    private Dialogue dialogue;
+    private CombatTurn combat;
 
     private Inventory inv;
     private DataManager dataManager;
@@ -14,10 +16,15 @@ public class EvtBarBtn : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<Player>();
+        combat = FindObjectOfType<CombatTurn>();
         dataManager = FindObjectOfType<DataManager>();
+
+        player = FindObjectOfType<Player>();
         inv = dataManager.GetData<Inventory>("inventory");
+
         buttons = FindObjectOfType<ButtonUpdater>();
+        dialogue = dataManager.GetDialogue();
+
     }
 
     public void BtnLT()
@@ -33,9 +40,7 @@ public class EvtBarBtn : MonoBehaviour
                 player.Attack(AttackTypes.PUNCH);
                 break;
             case ButtonStates.ITEM:
-                buttons.SetEvtBar(EvtBarStates.DIALOGUE);
-                inv.items[0].ammount--;
-                player.Heal(10);
+                player.Heal();
                 break;
             case ButtonStates.DEV_TOOLS:
                 dataManager.Save("inventory");
@@ -72,7 +77,7 @@ public class EvtBarBtn : MonoBehaviour
         switch (menuState)
         {
             case ButtonStates.DEFAULT:
-                player.SkipTurn();
+                combat.SkipTurn();
                 break;
             case ButtonStates.ATTACK:
                 buttons.SetEvtBar(EvtBarStates.DIALOGUE);
@@ -108,4 +113,10 @@ public class EvtBarBtn : MonoBehaviour
                 break;
         }
     }
+
+    void Heal()
+    {
+
+    }
+
 }
