@@ -1,16 +1,1 @@
-{
-  "items": {
-    "hpPotion": {
-      "name": "Health Potion",
-      "lvl": 1,
-      "desc": "gives instant hp.",
-      "ammount": 1
-    },
-    "strPotion": {
-      "name": "Strength Potion",
-      "lvl": 1,
-      "desc": "adds strenght...",
-      "ammount": 0
-    }
-  }
-}
+{"items":{"hpPotion":{"name":"Health Potion","lvl":1,"desc":"gives instant hp.","ammount":0},"strPotion":{"name":"Strength Potion","lvl":1,"desc":"adds strenght...","ammount":0}}}

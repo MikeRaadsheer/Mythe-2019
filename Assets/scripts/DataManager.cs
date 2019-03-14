@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataManager : MonoBehaviour
-{
+public class DataManager : MonoBehaviour {
 
     private string inventoryFileName = "inventory.json";
     private string playerPath;
@@ -17,10 +16,9 @@ public class DataManager : MonoBehaviour
 
     public Inventory inventory;
     public Enemy enemy;
-    public InventoryPlayerStats player;
+    public PlayerStats player;
 
-    void Awake()
-    {
+    void Awake() {
         loadData = GetComponent<LoadData>();
         saveData = GetComponent<SaveData>();
 
@@ -32,46 +30,41 @@ public class DataManager : MonoBehaviour
         //saveData.SetGameData(playerPath, invFileName, inv);
 
         inventory = loadData.GetGameData<Inventory>(playerPath, inventoryFileName);
-        player = loadData.GetGameData<InventoryPlayerStats>(playerPath, playerFileName);
+        player = loadData.GetGameData<PlayerStats>(playerPath, playerFileName);
 
     }
 
-    public void SaveAll()
-    {
+    public void SaveAll() {
         saveData.SetGameData(playerPath, inventoryFileName, inventory);
         saveData.SetGameData(playerPath, playerFileName, player);
     }
 
-    public void Save(string type)
-    {
-        switch (type)
-        {
+    public void Save(string type) {
+        switch(type) {
             case "player":
-                saveData.SetGameData(playerPath, "player.json", player);
-                break;
+            saveData.SetGameData(playerPath, "player.json", player);
+            break;
             case "inventory":
-                saveData.SetGameData(playerPath, "inventory.json", inventory);
-                break;
+            saveData.SetGameData(playerPath, "inventory.json", inventory);
+            break;
         }
     }
 
-    public T GetData<T>(string dataName)
-    {
+    public T GetData<T>(string dataName) {
         var result = (T)this.GetType().GetField(dataName).GetValue(this);
 
-        if (result != null) return result;
+        if(result != null)
+            return result;
 
         Debug.LogError("The data for: " + dataName + " was empty!");
         return default(T);
     }
 
-    public void SetData(string path, string fileName, object data)
-    {
+    public void SetData(string path, string fileName, object data) {
         saveData.SetGameData(path, fileName, data);
     }
 
-    public Dialogue GetDialogue()
-    {
+    public Dialogue GetDialogue() {
         return dialogue;
     }
 
