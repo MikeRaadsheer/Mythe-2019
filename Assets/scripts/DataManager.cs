@@ -16,7 +16,7 @@ public class DataManager : MonoBehaviour
     public SaveData saveData;
 
     public Inventory inventory;
-    public Enemy enemy;
+    //public Enemy enemy;
     public PlayerStats player;
 
     void Awake()
@@ -31,7 +31,9 @@ public class DataManager : MonoBehaviour
 
         //saveData.SetGameData(playerPath, invFileName, inv);
 
+
         inventory = loadData.GetGameData<Inventory>(playerPath, inventoryFileName);
+
         player = loadData.GetGameData<PlayerStats>(playerPath, playerFileName);
 
     }

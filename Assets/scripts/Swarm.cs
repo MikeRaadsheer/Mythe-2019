@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using System;
 
 public class Swarm : MonoBehaviour
 {
+
+    public Action<int> hpChanged;
 
     private DataManager dataManager;
     private Dialogue dialogue;
@@ -57,6 +60,8 @@ public class Swarm : MonoBehaviour
             dialogue.SetText(("You dealt " + dmg.ToString() + " damage!").ToUpper());
             waitToAttack = false;
         }
+
+        if (hpChanged != null) hpChanged(swarm.hp);
 
         takeTurn = true;
 

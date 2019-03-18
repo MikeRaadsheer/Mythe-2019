@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour 
 {
-    //private PlayerStats player;
+
+    public Action<int> hpChanged;
+
     public PlayerStats player;
 
     private CombatTurn combat;
@@ -25,12 +28,12 @@ public class Player : MonoBehaviour
         target = FindObjectOfType<Swarm>();
 
         //player = new PlayerStats("Player", 100, 2, 0, 1);
-        combat = FindObjectOfType<CombatTurn>();
         dataManager = FindObjectOfType<DataManager>();
+        dialogue = dataManager.GetDialogue();
+        combat = FindObjectOfType<CombatTurn>();
         player = dataManager.GetData<PlayerStats>("player");
         inv = dataManager.GetData<Inventory>("inventory");
         gameObject.name = player.name;
-        dialogue = dataManager.GetDialogue();
 
         player.pos.x = transform.position.x;
         player.pos.y = transform.position.y;
@@ -82,6 +85,8 @@ public class Player : MonoBehaviour
             dialogue.SetText(("You took " + dmg.ToString() + " damage!").ToUpper());
             waitToAttack = false;
         }
+
+        if(hpChanged != null) hpChanged(player.hp);
 
         takeTurn = true;
     }

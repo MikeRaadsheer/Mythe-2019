@@ -1,16 +1,61 @@
 {
   "items": {
     "hpPotion": {
-      "name": "Health Potion",
-      "lvl": 1,
-      "desc": "gives instant hp.",
-      "ammount": 1
+      "name": "",
+      "lvl": 0,
+      "desc": "",
+      "ammount": 0
     },
     "strPotion": {
-      "name": "Strength Potion",
-      "lvl": 1,
-      "desc": "adds strenght...",
+      "name": "",
+      "lvl": 0,
+      "desc": "",
       "ammount": 0
     }
+  },
+  "slots": {
+    "maxSlots": 10,
+    "slot": [
+      {
+        "name": "",
+        "ID": 0
+      },
+      {
+        "name": "",
+        "ID": 1
+      },
+      {
+        "name": "",
+        "ID": 2
+      },
+      {
+        "name": "",
+        "ID": 3
+      },
+      {
+        "name": "",
+        "ID": 4
+      },
+      {
+        "name": "",
+        "ID": 5
+      },
+      {
+        "name": "",
+        "ID": 6
+      },
+      {
+        "name": "",
+        "ID": 7
+      },
+      {
+        "name": "",
+        "ID": 8
+      },
+      {
+        "name": "",
+        "ID": 9
+      }
+    ]
   }
 }
