@@ -10,7 +10,7 @@ public class CombatState : MonoBehaviour
 	public Action EnteredWorld; // Yells EnteredWorld when combat is over.
 
 	// Components.
-	private EnemyController _ec;
+	private EnemyController[] _ec;
 	private Swarm _swarm;
 
 	private GameObject _player;
@@ -24,14 +24,19 @@ public class CombatState : MonoBehaviour
 
 	private void Awake()
 	{
-		_ec = FindObjectOfType<EnemyController>();
+		_ec = FindObjectsOfType<EnemyController>();
 		_swarm = FindObjectOfType<Swarm>();
 	}
 
 	private void Start()
 	{
-		if (_ec != null) _ec.EnteredCombat += SwitchToCombatScene;
-		if (_swarm != null) _swarm.EnemyDefeated += TheEnemyIsDead;
+
+        for (int i = 0; i < _ec.Length; i++)
+        {
+    		if (_ec[i] != null) _ec[i].EnteredCombat += SwitchToCombatScene;
+        }
+
+        if (_swarm != null) _swarm.EnemyDefeated += TheEnemyIsDead;
 		_player = GameObject.FindGameObjectWithTag("Player");
 		_dataManager = FindObjectOfType<DataManager>();
 

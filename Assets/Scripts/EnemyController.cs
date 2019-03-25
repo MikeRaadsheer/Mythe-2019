@@ -41,8 +41,8 @@ public class EnemyController : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            Invoke("LoadCombat", 0.1f);
             canInteract = true;
+            Invoke("LoadCombat", 0.1f);
         }
 
     }
@@ -79,8 +79,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-
-        EnteredCombat();
+        if(EnteredCombat != null) EnteredCombat();
     }
 
     private void OnDisable()
