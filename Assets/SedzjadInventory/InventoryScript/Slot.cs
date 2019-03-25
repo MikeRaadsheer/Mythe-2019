@@ -1,39 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+﻿//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.UI;
+//using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IPointerClickHandler
-{
-    public GameObject Item;
-    public Transform SlotIconGO;
+//public class Slot : MonoBehaviour, IPointerClickHandler
+//{
+//    public GameObject Item;
+//    public Transform SlotIconGO;
 
-    public string type;
-    public string description;
-    public int ID;
+//    public string type;
+//    public string description;
+//    public int ID;
 
-    public bool Empty;
+//    public bool Empty;
     
-    public Sprite Icon;
+//    public Sprite Icon;
 
-    public void OnPointerClick(PointerEventData pointerEventData)
-    {
-        UseItem();
-    }
+//    public void OnPointerClick(PointerEventData pointerEventData)
+//    {
+//        UseItem();
+//    }
 
-    private void Start()
-    {
-       SlotIconGO = transform.GetChild(0);
-    }
+//    private void Start()
+//    {
+//       SlotIconGO = transform.GetChild(0);
+//    }
 
-    public void UpdateSlot()
-    {
-        SlotIconGO.GetComponent<Image>().sprite = Icon;
-    }
+//    public void UpdateSlot()
+//    {
+//        SlotIconGO.GetComponent<Image>().sprite = Icon;
+//    }
 
-    public void UseItem()
-    {
-        Item.GetComponent<InventoryItems>().ItemUsage();
-    }
-}
+//    public void UseItem()
+//    {
+//        Item.GetComponent<InventoryItems>().ItemUsage();
+//    }
+//}

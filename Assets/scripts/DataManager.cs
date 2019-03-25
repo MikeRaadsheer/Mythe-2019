@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataManager : MonoBehaviour {
 
+	private string playerFileName = "player.json";
     private string inventoryFileName = "inventory.json";
-    private string playerPath;
-    private string playerFileName = "player.json";
+    private string enemiesFileName = "enemies.json";
+	private string playerPath;
+	private string enemyPath;
 
     public Dialogue dialogue;
 
@@ -15,21 +18,29 @@ public class DataManager : MonoBehaviour {
     public SaveData saveData;
 
     public Inventory inventory;
-    public Enemy enemy;
+    public Enemies enemies;
     public PlayerStats player;
+
+    private void Start()
+    {
+        dialogue = FindObjectOfType<Dialogue>();
+        if(SceneManager.GetActiveScene().name == "Combat") GameObject.Find("Dialogue").SetActive(false);
+    }
 
     void Awake() {
         loadData = GetComponent<LoadData>();
         saveData = GetComponent<SaveData>();
 
-        playerPath = Application.dataPath + "/gameData/player/";
+		playerPath = Application.dataPath + "/gameData/player/";
+		enemyPath = Application.dataPath + "/gameData/enemy/";
 
-        //var inv = new Inventory();
-        //string invFileName = "inventory.json";
+		//var enemies = new Enemies();
+		//File.WriteAllText(enemyPath + enemiesFileName, JsonUtility.ToJson(enemies));
 
-        //saveData.SetGameData(playerPath, invFileName, inv);
+		enemies = loadData.GetGameData<Enemies>(enemyPath, enemiesFileName);
 
         inventory = loadData.GetGameData<Inventory>(playerPath, inventoryFileName);
+
         player = loadData.GetGameData<PlayerStats>(playerPath, playerFileName);
 
     }
@@ -37,6 +48,7 @@ public class DataManager : MonoBehaviour {
     public void SaveAll() {
         saveData.SetGameData(playerPath, inventoryFileName, inventory);
         saveData.SetGameData(playerPath, playerFileName, player);
+        saveData.SetGameData(enemyPath, enemiesFileName, enemies);
     }
 
     public void Save(string type) {

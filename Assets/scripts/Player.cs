@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour 
 {
-    //private PlayerStats player;
-    private PlayerStats player;
+
+    public Action<int> hpChanged;
+
+    public PlayerStats player;
 
     private CombatTurn combat;
     private Dialogue dialogue;
@@ -32,9 +35,12 @@ public class Player : MonoBehaviour
         inv = dataManager.GetData<Inventory>("inventory");
         gameObject.name = player.name;
 
-        player.pos.x = transform.position.x;
-        player.pos.y = transform.position.y;
-        player.pos.z = transform.position.z;
+
+        //transform.position = new Vector3()
+
+        //player.pos.x = transform.position.x;
+        //player.pos.y = transform.position.y;
+        //player.pos.z = transform.position.z;
 
         //dataManager.SetData(Application.dataPath + "/gameData/player/", "player.json", player);
 
@@ -42,6 +48,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+
         waitToAttack = dialogue.GetTyping();
 
         if (Input.anyKeyDown && !waitToAttack && takeTurn)
@@ -58,6 +65,8 @@ public class Player : MonoBehaviour
             buttons.SetEvtBar(EvtBarStates.BUTTONS);
             buttons.SetMenu(ButtonStates.ITEM);
         }
+
+
     }
 
     public void TakeDamage(AttackTypes type, int dmg)
@@ -82,6 +91,8 @@ public class Player : MonoBehaviour
             dialogue.SetText(("You took " + dmg.ToString() + " damage!").ToUpper());
             waitToAttack = false;
         }
+
+        if(hpChanged != null) hpChanged(player.hp);
 
         takeTurn = true;
     }

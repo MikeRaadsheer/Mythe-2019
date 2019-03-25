@@ -1,23 +1,40 @@
 ﻿using UnityEngine;
+using System;
 
 public class Swarm : MonoBehaviour
 {
 
-    private DataManager dataManager;
+    public Action<int> hpChanged;
+
+    private DataManager _dataManager;
     private Dialogue dialogue;
     private Enemy swarm = new Enemy("Swarm", 10, 1, 0, AttackTypes.FIRE, AttackTypes.STAB, 1);
     private Player target;
 
-    private bool waitToAttack = false;
+	private bool waitToAttack = false;
     private bool takeTurn = false;
+	private bool clickToExit = false;
+
+	public Action EnemyDefeated;
 
 
     private void Start()
     {
-        dataManager = FindObjectOfType<DataManager>();
+        _dataManager = FindObjectOfType<DataManager>();
         swarm.att = (int)Mathf.Sqrt(swarm.lvl);
         target = FindObjectOfType<Player>();
-        dialogue = dataManager.GetDialogue();
+        dialogue = _dataManager.GetDialogue();
+
+        var _enemies = _dataManager.GetData<Enemies>("enemies");
+
+        for (int i = 0; i < _enemies.states.Length; i++)
+        {
+            if (_enemies.states[i].isFighting)
+            {
+                swarm.hp = _enemies.states[i].hp;
+            }
+        }
+
     }
 
     private void Update()
@@ -48,15 +65,16 @@ public class Swarm : MonoBehaviour
         
         if (swarm.hp <= 0)
         {
-            swarm.hp = 0;
-            dialogue.SetText(("You killed the " + swarm.name).ToUpper());
-            Destroy(gameObject, 1f);
-        }
-        else
+			swarm.hp = 0;
+			KillThisEnemy();
+		}
+		else
         {
             dialogue.SetText(("You dealt " + dmg.ToString() + " damage!").ToUpper());
             waitToAttack = false;
         }
+
+        if (hpChanged != null) hpChanged(swarm.hp);
 
         takeTurn = true;
 
@@ -81,5 +99,25 @@ public class Swarm : MonoBehaviour
     {
         return swarm.lvl;
     }
+	
+	private void KillThisEnemy()
+	{
+		clickToExit = true;
+		dialogue.SetText(("You killed the " + swarm.name).ToUpper());
+        EnemyDefeated(); // Yell the swarm has died.
+		Destroy(gameObject, 1f);
+	}
 
+    private void OnDestroy()
+    {
+        var _enemies = _dataManager.GetData<Enemies>("enemies");
+
+        for (int i = 0; i < _enemies.states.Length; i++)
+        {
+            if (_enemies.states[i].isFighting)
+            {
+                _enemies.states[i].hp = swarm.hp;
+            }
+        }
+    }
 }

@@ -3,7 +3,7 @@ using System.IO;
 
 public class SaveData : MonoBehaviour {
 
-    public void SetGameData(string path, string fileName, object data)
+	public void SetGameData(string path, string fileName, object data)
     {
         if (!File.Exists(path + fileName))
         {
@@ -15,6 +15,6 @@ public class SaveData : MonoBehaviour {
             return;
         }
 
-        File.WriteAllText(path + fileName, JsonUtility.ToJson(data));
-    }
+		File.WriteAllText(path + fileName, JsonUtility.ToJson(data));
+	}
 }
