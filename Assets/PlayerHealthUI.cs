@@ -14,6 +14,7 @@ public class PlayerHealthUI : MonoBehaviour {
     private Player player;
     private Image healthBar;
     [SerializeField] private Image healthBarBackground;
+    [SerializeField] private List<Image> borders = new List<Image>(); 
     [SerializeField] private TextMeshProUGUI healthText;
 
     [SerializeField] private TextAsset playerJson;
@@ -41,6 +42,10 @@ public class PlayerHealthUI : MonoBehaviour {
         healthBar.fillAmount = Map(health, 0, 100, 0, 1); // Maps health from 0 and 100 to 0 and 1
         healthBar.color = Color.Lerp(Color.red, Color.green, Map(health, 0, maxHealth, 0, 1)); // Change the color of the healthbar based on the health amount
         healthBarBackground.color = Color.Lerp(Color.red, Color.green, Map(health, 0, maxHealth, 0, 1));
+
+        for(int i = 0; i < borders.Count; i++) {
+            borders[i].color = Color.Lerp(Color.red, Color.green, Map(health, 0, maxHealth, 0, 1));
+        }
         
         /*Get reference to the color and change the alpha*/ {
             var color = healthBarBackground.color;
