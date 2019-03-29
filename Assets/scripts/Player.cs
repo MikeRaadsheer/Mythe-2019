@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
 
     public Action<int> hpChanged;
+    public Action<AttackTypes> playerDamageType;
 
     public PlayerStats player;
 
@@ -71,6 +72,9 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(AttackTypes type, int dmg)
     {
+
+        if (playerDamageType != null) playerDamageType(type);
+
         switch (type)
         {
             case AttackTypes.FIRE:
