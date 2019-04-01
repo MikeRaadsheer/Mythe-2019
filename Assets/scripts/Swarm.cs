@@ -24,7 +24,6 @@ public class Swarm : MonoBehaviour
         _dataManager = FindObjectOfType<DataManager>();
         swarm.att = (int)Mathf.Sqrt(swarm.lvl);
         target = FindObjectOfType<Player>();
-        dialogue = _dataManager.GetDialogue();
 
         var _enemies = _dataManager.GetData<Enemies>("enemies");
 
@@ -32,6 +31,11 @@ public class Swarm : MonoBehaviour
 
     private void Update()
     {
+        if (dialogue == null)
+        {
+            dialogue = _dataManager.GetDialogue();
+        }
+
         waitToAttack = dialogue.GetTyping();
 
         if (Input.anyKeyDown && !waitToAttack && takeTurn)

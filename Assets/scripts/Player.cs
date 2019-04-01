@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
 
         //player = new PlayerStats("Player", 100, 2, 0, 1);
         dataManager = FindObjectOfType<DataManager>();
-        dialogue = dataManager.GetDialogue();
         combat = FindObjectOfType<CombatTurn>();
         player = dataManager.GetData<PlayerStats>("player");
         inv = dataManager.GetData<Inventory>("inventory");
@@ -49,6 +48,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+
+        if(dialogue == null)
+        {
+            dialogue = dataManager.GetDialogue();
+        }
 
         waitToAttack = dialogue.GetTyping();
 

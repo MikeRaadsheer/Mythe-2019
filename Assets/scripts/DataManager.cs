@@ -21,13 +21,9 @@ public class DataManager : MonoBehaviour {
     public Enemies enemies;
     public PlayerStats player;
 
-    private void Start()
-    {
-        dialogue = FindObjectOfType<Dialogue>();
-        if(SceneManager.GetActiveScene().name == "Combat") GameObject.Find("Dialogue").SetActive(false);
-    }
 
     void Awake() {
+
         loadData = GetComponent<LoadData>();
         saveData = GetComponent<SaveData>();
 
@@ -43,6 +39,15 @@ public class DataManager : MonoBehaviour {
 
         player = loadData.GetGameData<PlayerStats>(playerPath, playerFileName);
 
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Combat" && dialogue == null)
+        {
+            dialogue = FindObjectOfType<Dialogue>();
+            GameObject.Find("Dialogue").SetActive(false);
+        }
     }
 
     public void SaveAll() {
