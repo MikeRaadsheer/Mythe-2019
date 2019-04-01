@@ -5,6 +5,7 @@ public class Swarm : MonoBehaviour
 {
 
     public Action<int> hpChanged;
+    public Action<AttackTypes> enemyDamageType;
 
     private DataManager _dataManager;
     private Dialogue dialogue;
@@ -27,14 +28,6 @@ public class Swarm : MonoBehaviour
 
         var _enemies = _dataManager.GetData<Enemies>("enemies");
 
-        for (int i = 0; i < _enemies.states.Length; i++)
-        {
-            if (_enemies.states[i].isFighting)
-            {
-                swarm.hp = _enemies.states[i].hp;
-            }
-        }
-
     }
 
     private void Update()
@@ -51,6 +44,9 @@ public class Swarm : MonoBehaviour
 
     public void TakeDamage(AttackTypes type, int dmg)
     {
+
+        if (enemyDamageType != null) enemyDamageType(type);
+
         switch (type)
         {
             case AttackTypes.FIRE:
