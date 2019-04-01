@@ -28,10 +28,14 @@ public class PlayerAnimationHandler : MonoBehaviour {
 
     void Update() {
         // Set the animation to the correct state based on the movement of the player;
-        if(rigidBody.velocity.x != 0) {
-            animator.SetInteger("AnimState", (int)AnimationState.Run);
+        if(rigidBody.velocity.x < -0.1 || rigidBody.velocity.x > 0.1) {
+            ChangeAnimationState(AnimationState.Run);
         } else {
-            animator.SetInteger("AnimState", (int)AnimationState.Idle);
+            ChangeAnimationState(AnimationState.Idle);
+        }
+
+        if(rigidBody.velocity.z < -0.1 || rigidBody.velocity.z > 0.1) {
+            ChangeAnimationState(AnimationState.Run);
         }
 
         // Get reference to the scale
@@ -53,5 +57,8 @@ public class PlayerAnimationHandler : MonoBehaviour {
     #endregion
 
     #region Private Methods
+    private void ChangeAnimationState(AnimationState state) {
+        animator.SetInteger("AnimState", (int)state);
+    }
     #endregion
 }

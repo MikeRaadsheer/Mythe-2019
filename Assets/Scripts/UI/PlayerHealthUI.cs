@@ -9,10 +9,11 @@ public class PlayerHealthUI : MonoBehaviour {
     #endregion
 
     #region Private Fields
-    [SerializeField] private float health;
+    private float health;
     private float maxHealth = 100;
-    private Player player;
+    private PlayerStats playerStats;
     private Image healthBar;
+    private DataManager dataManager;
     [SerializeField] private Image healthBarBackground;
     [SerializeField] private List<Image> borders = new List<Image>(); 
     [SerializeField] private TextMeshProUGUI healthText;
@@ -24,13 +25,15 @@ public class PlayerHealthUI : MonoBehaviour {
     private void Awake() {
         //player = JsonUtility.FromJson<Player>(playerJson.ToString());
         healthBar = GetComponent<Image>();
+        dataManager = FindObjectOfType<DataManager>();
     }
 
     void Start() {
         healthBar.fillMethod = Image.FillMethod.Horizontal; // Set fill method of the image to horizontal
         healthBar.fillOrigin = 0; // Fills image from the left
-
-        health = maxHealth;
+        
+        playerStats = dataManager.GetData<PlayerStats>("player");
+        health = playerStats.hp;
     }
 
     void Update() {
