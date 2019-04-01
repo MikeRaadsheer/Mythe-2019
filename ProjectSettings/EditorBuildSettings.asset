@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Combat.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Ferri Test.unity
+    guid: 9ecfbf2816af43d40afae09f77eb1a43
   m_configObjects: {}

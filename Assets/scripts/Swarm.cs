@@ -104,8 +104,10 @@ public class Swarm : MonoBehaviour
 	{
 		clickToExit = true;
 		dialogue.SetText(("You killed the " + swarm.name).ToUpper());
-        EnemyDefeated(); // Yell the swarm has died.
-		Destroy(gameObject, 1f);
+        if(EnemyDefeated != null) {
+            EnemyDefeated();
+        }  // Yell the swarm has died.
+        Destroy(gameObject, 1f);
 	}
 
     private void OnDestroy()
