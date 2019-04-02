@@ -566,7 +566,7 @@ PrefabInstance:
     - target: {fileID: 7464966140541316839, guid: 690b54c7337c27c48bcd8fe46ce39ab7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7464966140541316845, guid: 690b54c7337c27c48bcd8fe46ce39ab7,
         type: 3}
@@ -881,6 +881,21 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 231431242786892776, guid: 37e9251f14025c34d8f7b9ba2aa04690,
+        type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231431242786892776, guid: 37e9251f14025c34d8f7b9ba2aa04690,
+        type: 3}
+      propertyPath: m_text
+      value: 100/100
+      objectReference: {fileID: 0}
+    - target: {fileID: 231431242786892776, guid: 37e9251f14025c34d8f7b9ba2aa04690,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37e9251f14025c34d8f7b9ba2aa04690, type: 3}
 --- !u!1001 &418881402446209192
@@ -1036,7 +1051,7 @@ PrefabInstance:
     - target: {fileID: 7464966140541316839, guid: 690b54c7337c27c48bcd8fe46ce39ab7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7464966140541316845, guid: 690b54c7337c27c48bcd8fe46ce39ab7,
         type: 3}
