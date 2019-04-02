@@ -2,95 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.SceneManagement;
 
 public class CombatState : MonoBehaviour
 {
-	// Combat.
-	public Action EnteredWorld; // Yells EnteredWorld when combat is over.
+    // Combat.
+    public Action EnteredWorld; // Yells EnteredWorld when combat is over.
+    public Action LoadWorld;
 
-	// Components.
-	private EnemyController[] _ec;
-	private Swarm _swarm;
+    // Components.
+    private EnemyController[] _ec;
+    private Swarm _swarm;
 
-	private GameObject _player;
-	private DataManager _dataManager;
-    private enum _STATES { WIN, LOSE };
+    private GameObject _player;
+    private DataManager _dataManager;
     private Enemies _enemies;
 
+    private bool isDefeated = false;
 
 
-	private bool isDefeated = false;
-
-	private void Awake()
-	{
-		_ec = FindObjectsOfType<EnemyController>();
-		_swarm = FindObjectOfType<Swarm>();
-	}
-
-	private void Start()
-	{
-
-        for (int i = 0; i < _ec.Length; i++)
-        {
-    		if (_ec[i] != null) _ec[i].EnteredCombat += SwitchToCombatScene;
-        }
-
-        if (_swarm != null) _swarm.EnemyDefeated += TheEnemyIsDead;
-		_player = GameObject.FindGameObjectWithTag("Player");
-		_dataManager = FindObjectOfType<DataManager>();
-
-	}
-
-	private void Update()
-	{
-        if (isDefeated)
-        {
-            Invoke("SwitchToWorldScene", 3f);
-        }
-	}
-
-	private void TheEnemyIsDead()
-	{
-		isDefeated = true;
-	}
-
-	private void SwitchToCombatScene()
+    private void Start()
     {
-        var player = _dataManager.GetData<PlayerStats>("player");
+        _ec = FindObjectsOfType<EnemyController>();
+        _swarm = FindObjectOfType<Swarm>();
+
+        if (_swarm != null) { _swarm.EnemyDefeated += TheEnemyIsDead; } else { Debug.Log("where da enemy at?"); }
+
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _dataManager = FindObjectOfType<DataManager>();
+
+    }
+
+    private void Update()
+    {
+        if (isDefeated) Invoke("SwitchToWorld", 3f);
+    }
+
+    void SwitchToWorld()
+    {
+        if (LoadWorld == null) Debug.Log("ya Boi");
+        LoadWorld();
         
-        player.pos.x = _player.transform.position.x;
-        player.pos.y = _player.transform.position.y;
-        player.pos.z = _player.transform.position.z;
-
-        _dataManager.SaveAll();
-
-        Invoke("LoadCombatScene", 0.1f);
     }
 
-	private void SwitchToWorldScene()
+    private void TheEnemyIsDead()
     {
-        SetEnemyState(_STATES.WIN);
-
-        _dataManager.SaveAll();
-
-        SceneManager.LoadScene("Map");
+        Debug.Log("yo im ded");
+        isDefeated = true;
     }
 
-	void LoadCombatScene()
-    {
-        _dataManager.SaveAll();
-        SceneManager.LoadScene("Combat");
-	}
-
-    void SetEnemyState(_STATES state)
+    public void SetEnemyState(string state)
     {
         var enemies = _dataManager.GetData<Enemies>("enemies");
 
 
         switch (state)
         {
-            case _STATES.WIN:
+            case "Win":
                 for (int i = 0; i < 5; i++)
                 {
                     if (enemies.states[i].isFighting)
@@ -100,7 +67,7 @@ public class CombatState : MonoBehaviour
                     }
                 }
                 break;
-            case _STATES.LOSE:
+            case "Lose":
                 for (int i = 0; i < 5; i++)
                 {
                     if (enemies.states[i].isFighting)
