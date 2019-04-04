@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
 	private float yClose = 1f;
 	private float yNormal = 2f;
 
-	private float zOffset = 1f;
+	private float zOffset = -1f;
 	private float zClose = -1.7f;
 	private float zNormal = 1f;
 
@@ -64,7 +64,6 @@ public class CameraController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		CameraCurrentLocation();
-		CheckDistance();
 		Follow();
 	}
 
@@ -143,24 +142,4 @@ public class CameraController : MonoBehaviour
 		}
 	}
 
-	private void CheckDistance() // Checks distance between target and all cameras.
-	{
-		for (int i = 0; i < currentCameraLocation.Length; i++)
-		{
-			if (i != currentCamera)
-			{
-				targetDistance = Vector3.Distance(target.position, cameras[i].transform.position - new Vector3(0, 0, zOffset));
-			}
-
-			if (targetDistance < cameraRange) // Switches to new camera within this range.
-			{
-				currentCamera = i;
-			}
-
-			if (target.position.z < cameras[i].transform.position.z) // If player walks beneath camera, take previous camera.
-			{
-				currentCamera = i - 1;
-			}
-		}
-	}
 }

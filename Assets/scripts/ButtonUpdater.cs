@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ButtonUpdater : MonoBehaviour {
     public GameObject buttons;
     public GameObject dialogue;
 
-    public Text txtLT;
-    public Text txtLB;
-    public Text txtRT;
-    public Text txtRB;
+    public TextMeshProUGUI txtLT;
+    public TextMeshProUGUI txtLB;
+    public TextMeshProUGUI txtRT;
+    public TextMeshProUGUI txtRB;
 
     public Dialogue dialogueSystem;
 

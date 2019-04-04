@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
 
-    public Text dialogueText;
+    public TextMeshProUGUI dialogueText;
     private bool isTyping = false;
     private float typeSpeed = 0.03f;
     
@@ -17,7 +18,7 @@ public class Dialogue : MonoBehaviour
     public IEnumerator TypeText(string text)
     {
         isTyping = true;
-        dialogueText = GetComponent<Text>();
+        dialogueText = GetComponent<TextMeshProUGUI>();
         dialogueText.text = "";
         yield return new WaitForSeconds(Mathf.PI / 10);
 

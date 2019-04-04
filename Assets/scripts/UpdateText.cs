@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpdateText : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class UpdateText : MonoBehaviour
 
     public targetType targetSelector;
 
-    public Text txtName;
-    public Text txtHP;
+    public TextMeshProUGUI txtName;
+    public TextMeshProUGUI txtHP;
     public Text txtLVL;
 
     private GameObject target;

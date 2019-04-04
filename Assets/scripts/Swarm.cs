@@ -9,7 +9,7 @@ public class Swarm : MonoBehaviour
 
     private DataManager _dataManager;
     private Dialogue dialogue;
-    private Enemy swarm = new Enemy("Swarm", 10, 1, 0, AttackTypes.FIRE, AttackTypes.STAB, 1);
+    private Enemy swarm = new Enemy("Fly Mutant", 30, 8, 0, AttackTypes.FIRE, AttackTypes.STAB, 1);
     private Player target;
 
 	private bool waitToAttack = false;
@@ -22,7 +22,7 @@ public class Swarm : MonoBehaviour
     private void Start()
     {
         _dataManager = FindObjectOfType<DataManager>();
-        swarm.att = (int)Mathf.Sqrt(swarm.lvl);
+        //swarm.att = (int)Mathf.Sqrt(swarm.lvl);
         target = FindObjectOfType<Player>();
 
         var _enemies = _dataManager.GetData<Enemies>("enemies");
