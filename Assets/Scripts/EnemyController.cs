@@ -67,10 +67,12 @@ public class EnemyController : MonoBehaviour
 
 	private void LoadCombat()
 	{
+
         var _enemies = _dataManager.GetData<Enemies>("enemies");
 
         int _id = _enabler.GetId();
         
+
         for (int i = 0; i < _enemies.states.Length; i++)
         {
             if (_enemies.states[i].ID == _id)
@@ -79,7 +81,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if(EnteredCombat != null) EnteredCombat();
+        if (EnteredCombat != null) EnteredCombat(); 
     }
 
     private void OnDisable()

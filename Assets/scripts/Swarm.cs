@@ -110,16 +110,16 @@ public class Swarm : MonoBehaviour
         Destroy(gameObject, 1f);
 	}
 
-    private void OnDestroy()
-    {
-        var _enemies = _dataManager.GetData<Enemies>("enemies");
+    //private void OnDestroy()
+    //{
+    //    var _enemies = _dataManager.GetData<Enemies>("enemies");
 
-        for (int i = 0; i < _enemies.states.Length; i++)
-        {
-            if (_enemies.states[i].isFighting)
-            {
-                _enemies.states[i].hp = swarm.hp;
-            }
-        }
-    }
+    //    for (int i = 0; i < _enemies.states.Length; i++)
+    //    {
+    //        if (_enemies.states[i].isFighting)
+    //        {
+    //            _enemies.states[i].hp = swarm.hp;
+    //        }
+    //    }
+    //}
 }

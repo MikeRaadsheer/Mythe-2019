@@ -30,7 +30,7 @@ public class SceneSwitcher : MonoBehaviour
 
         for (int i = 0; i < _ec.Length; i++)
         {
-            if (_ec[i] != null) _ec[i].EnteredCombat += SwitchToCombatScene;
+            _ec[i].EnteredCombat += SwitchToCombatScene;
         }
 
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -44,12 +44,11 @@ public class SceneSwitcher : MonoBehaviour
 
         currentScene = SceneManager.GetActiveScene().name;
 
-        if(scene != currentScene && currentScene == "Combat")
+        if (scene != currentScene && currentScene == "Combat")
         {
             _combatState = FindObjectOfType<CombatState>();
             _combatState.LoadWorld += SwitchToWorldScene;
         }
-
     }
 
     void LoadCombatScene()

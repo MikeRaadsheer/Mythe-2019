@@ -6,5 +6,4 @@ public class EnemyState
 	public int ID;
     public bool isAlive;
     public bool isFighting;
-    public int hp;
 }

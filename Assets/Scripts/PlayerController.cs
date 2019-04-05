@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	// Data.
 	private DataManager _dataManager;
+    private PlayerStats _player;
 
 	// Sounds.
 	private float walkCounter = 0f;
@@ -40,9 +41,9 @@ public class PlayerController : MonoBehaviour
 		_dataManager = FindObjectOfType<DataManager>();
 
 		// Stats.
-		var player = _dataManager.GetData<PlayerStats>("player");
+		_player = _dataManager.GetData<PlayerStats>("player");
 
-        transform.position = new Vector3(player.pos.x, player.pos.y, player.pos.z);
+        transform.position = new Vector3(_player.pos.x, _player.pos.y, _player.pos.z);
     }
 
 	void Update()
@@ -104,8 +105,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        var _player = _dataManager.GetData<PlayerStats>("player");
-
         _player.pos.x = transform.position.x;
         _player.pos.y = transform.position.y;
         _player.pos.z = transform.position.z;

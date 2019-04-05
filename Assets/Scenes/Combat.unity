@@ -154,7 +154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0b1e2d4382dc7294d9dc44d31f775c1b, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0b1e2d4382dc7294d9dc44d31f775c1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2405,6 +2405,7 @@ GameObject:
   - component: {fileID: 1025609086}
   - component: {fileID: 1025609085}
   - component: {fileID: 1025609084}
+  - component: {fileID: 1025609087}
   m_Layer: 0
   m_Name: Combat
   m_TagString: Untagged
@@ -2446,10 +2447,23 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1896222434}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1025609087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025609083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70df239b4a42f5a42bfe9742195ca750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1066567453
 GameObject:
   m_ObjectHideFlags: 0
@@ -4596,8 +4610,6 @@ GameObject:
   - component: {fileID: 1896222433}
   - component: {fileID: 1896222432}
   - component: {fileID: 1896222431}
-  - component: {fileID: 1896222435}
-  - component: {fileID: 1896222436}
   m_Layer: 0
   m_Name: Main (only use if not send from world)
   m_TagString: Untagged
@@ -4684,43 +4696,33 @@ MonoBehaviour:
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
     - ID: 0
       isAlive: 0
       isFighting: 0
-      hp: 0
   player:
     name: 
     hp: 0
@@ -4738,37 +4740,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896222430}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1025609086}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1896222435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896222430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a4231190c4137d4ca0e8f8461cabb3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1896222436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896222430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a246a74b8870748863c42d2e8504b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1904244059
 GameObject:
   m_ObjectHideFlags: 0
@@ -5112,7 +5090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0b1e2d4382dc7294d9dc44d31f775c1b, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0b1e2d4382dc7294d9dc44d31f775c1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

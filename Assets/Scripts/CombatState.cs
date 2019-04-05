@@ -25,7 +25,7 @@ public class CombatState : MonoBehaviour
         _ec = FindObjectsOfType<EnemyController>();
         _swarm = FindObjectOfType<Swarm>();
 
-        if (_swarm != null) { _swarm.EnemyDefeated += TheEnemyIsDead; } else { Debug.Log("where da enemy at?"); }
+        if (_swarm != null) { _swarm.EnemyDefeated += TheEnemyIsDead; } else { Debug.LogError("Enemy could not be found!"); }
 
         _player = GameObject.FindGameObjectWithTag("Player");
         _dataManager = FindObjectOfType<DataManager>();
@@ -46,7 +46,6 @@ public class CombatState : MonoBehaviour
 
     private void TheEnemyIsDead()
     {
-        Debug.Log("yo im ded");
         isDefeated = true;
     }
 
@@ -68,14 +67,17 @@ public class CombatState : MonoBehaviour
                 }
                 break;
             case "Lose":
-                for (int i = 0; i < 5; i++)
-                {
-                    if (enemies.states[i].isFighting)
-                    {
-                        enemies.states[i].isFighting = false;
-                        enemies.states[i].isAlive = true;
-                    }
-                }
+
+                //load checkpoint
+
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    if (enemies.states[i].isFighting)
+                //    {
+                //        enemies.states[i].isFighting = false;
+                //        enemies.states[i].isAlive = true;
+                //    }
+                //}
                 break;
             default:
                 break;
