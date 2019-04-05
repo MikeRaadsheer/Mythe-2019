@@ -28,6 +28,9 @@ public class CombatTurn : MonoBehaviour
     public void SkipTurn()
     {
         buttons.SetEvtBar(EvtBarStates.DIALOGUE);
+
+        if(dialogue == null) dialogue = dataManager.GetDialogue();
+
         dialogue.SetText(("You skipped your turn!").ToUpper());
         EnemyTurn();
     }
